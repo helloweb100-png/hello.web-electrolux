@@ -36,18 +36,18 @@
     <meta name="twitter:description" content="Reparación de línea blanca Electrolux a domicilio. Garantía por escrito y servicio el mismo día.">
 
     <!-- Favicon inline (rayo blanco sobre cuadro verde) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230f7a4b'/%3E%3Cpath d='M22.5 8L11 22.5h8.2L17.5 32 29 17.5h-8.2z' fill='%23fff'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%230f7a4b'/%3E%3Cpath d='M22.5 8L11 22.5h8.2L17.5 32 29 17.5h-8.2z' fill='%23fff'/%3E%3C/svg%3E">
 
-    <!-- Tipografía: Manrope (títulos y texto) -->
+    <!-- Tipografía: Geist (títulos y texto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.pexels.com">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- La foto del hero es lo primero que se pinta: se precarga para mejorar el LCP -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=900"
-          imagesrcset="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=600 600w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=900 900w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=1200 1200w"
-          imagesizes="(min-width: 1024px) 500px, calc(100vw - 56px)">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- La imagen de fondo del hero es lo primero que se pinta: se precarga para mejorar el LCP -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=1400"
+          imagesrcset="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
+          imagesizes="100vw">
     <link rel="stylesheet" href="styles.css">
 
     <!-- Datos estructurados: negocio local (el teléfono se sincroniza con CONFIG en app.js) -->
@@ -101,73 +101,41 @@
 <body class="is-loading">
 
 <!-- ═══════ SPRITE DE ÍCONOS ═══════
-     UI: trazos basados en Feather (MIT). Equipos: compuestos con primitivas geométricas.
-     WhatsApp: glifo original de la plantilla. -->
+     Sólo cuatro símbolos: marca, teléfono y flecha (trazos tipo Feather, MIT) y el glifo de WhatsApp. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <!-- Marca: cuadro verde con rayo blanco -->
     <symbol id="logo-mark" viewBox="0 0 40 40">
-        <rect width="40" height="40" rx="10" fill="#0f7a4b"/>
+        <rect width="40" height="40" rx="8" fill="#0f7a4b"/>
         <path d="M22.5 8L11 22.5h8.2L17.5 32 29 17.5h-8.2z" fill="#fff"/>
     </symbol>
-
-    <!-- Equipos (viewBox 48) -->
-    <symbol id="i-fridge" viewBox="0 0 48 48" stroke-width="2.3"><rect x="12" y="4" width="24" height="40" rx="3.5"/><path d="M12 18h24M17 9v5M17 23v8"/></symbol>
-    <symbol id="i-washer" viewBox="0 0 48 48" stroke-width="2.3"><rect x="8" y="4" width="32" height="40" rx="4.5"/><path d="M8 12h32M14 8h.01M19 8h.01"/><circle cx="24" cy="28" r="10"/><path d="M17.5 27c2-2 4-2 6.5 0s4.5 2 6.5 0"/></symbol>
-    <symbol id="i-dryer" viewBox="0 0 48 48" stroke-width="2.3"><rect x="8" y="4" width="32" height="40" rx="4.5"/><path d="M8 12h32M14 8h.01M19 8h.01"/><circle cx="24" cy="28" r="10"/><circle cx="24" cy="28" r="3.5"/></symbol>
-    <symbol id="i-stove" viewBox="0 0 48 48" stroke-width="2.3"><rect x="5" y="9" width="38" height="30" rx="4.5"/><circle cx="16" cy="19" r="5"/><circle cx="32" cy="19" r="5"/><circle cx="16" cy="31" r="3.5"/><circle cx="32" cy="31" r="3.5"/><path d="M5 39v3M43 39v3"/></symbol>
-    <symbol id="i-oven" viewBox="0 0 48 48" stroke-width="2.3"><rect x="5" y="6" width="38" height="36" rx="4.5"/><path d="M5 15h38M12 10.5h.01M18 10.5h.01M36 10.5h.01"/><rect x="11" y="20" width="26" height="16" rx="2.5"/></symbol>
-    <symbol id="i-dishwasher" viewBox="0 0 48 48" stroke-width="2.3"><rect x="6" y="5" width="36" height="38" rx="4.5"/><path d="M6 14h36M12 9.5h.01M17 9.5h.01"/><path d="M13 37h22M15 37l3-10h12l3 10M24 19v3M19 20.5l1 2.5M29 20.5l-1 2.5"/></symbol>
-    <symbol id="i-freezer" viewBox="0 0 48 48" stroke-width="2.3"><rect x="6" y="8" width="36" height="32" rx="4"/><path d="M24 15v18M16.5 19.5l15 9M16.5 28.5l15-9M22 16l2 2 2-2M22 32l2-2 2 2"/></symbol>
-    <symbol id="i-gear" viewBox="0 0 48 48" stroke-width="2.3"><circle cx="24" cy="24" r="6.5"/><circle cx="24" cy="24" r="13"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.6 10.6l4.2 4.2M33.2 33.2l4.2 4.2M10.6 37.4l4.2-4.2M33.2 14.8l4.2-4.2"/></symbol>
-
-    <!-- UI (viewBox 24) -->
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
-    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-    <symbol id="i-cert" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></symbol>
-    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></symbol>
-    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
-
-    <!-- WhatsApp (relleno) -->
     <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
 </svg>
 
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
-<!-- ═══════ LOADER: spinner minimalista con progreso ═══════ -->
+<!-- ═══════ LOADER: marca, barra fina de progreso y teléfono visible. Sale como una cortina hacia arriba ═══════ -->
 <div id="loader" role="status" aria-live="polite">
     <span class="sr-only" id="ld-status">Cargando sitio</span>
     <div class="ld-center">
-        <div class="ld-spinner" aria-hidden="true">
-            <svg class="ld-ring" viewBox="0 0 88 88"><circle class="ld-track" cx="44" cy="44" r="40"/><circle class="ld-arc" cx="44" cy="44" r="40"/></svg>
-            <svg class="ld-mark" viewBox="0 0 40 40"><use href="#logo-mark"/></svg>
-        </div>
+        <svg class="ld-mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#logo-mark"/></svg>
         <p class="ld-name" aria-hidden="true">Servicio Técnico <span>Electrolux</span></p>
         <div class="ld-bar" aria-hidden="true"><span id="ld-fill"></span></div>
         <p class="ld-pct" aria-hidden="true"><span id="ld-num">0</span>%</p>
     </div>
     <!-- El teléfono se ve desde el primer segundo, incluso mientras carga el sitio -->
-    <a class="ld-tel" href="tel:+525500000000" data-call>Atención&nbsp;inmediata&nbsp;<b data-phone-text>55&nbsp;0000&nbsp;0000</b></a>
+    <a class="ld-tel" href="tel:+525500000000" data-call><small>Atención&nbsp;inmediata</small><b data-phone-text>55&nbsp;0000&nbsp;0000</b></a>
 </div>
 
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-<!-- ═══════ BARRA SUPERIOR + CABECERA ═══════ -->
-<aside class="utility" aria-label="Información del servicio">
-    <div class="container utility-in">
-        <p>Servicio técnico especializado en línea blanca Electrolux</p>
-        <p>CDMX y Estado de México · Atención los 7 días de la semana</p>
-    </div>
-</aside>
+<!-- ═══════ CABECERA ═══════ -->
 <div id="top-sentinel" aria-hidden="true"></div>
 
 <header class="site-header" id="site-header">
     <div class="container nav-in">
         <a class="brand" href="#inicio" aria-label="Servicio Técnico Electrolux CDMX y Edomex, inicio">
-            <svg class="brand-mark" viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><use href="#logo-mark"/></svg>
+            <svg class="brand-mark" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true"><use href="#logo-mark"/></svg>
             <span class="brand-text"><b>Servicio Técnico</b><small>Electrolux CDMX y Edomex</small></span>
         </a>
 
@@ -183,9 +151,6 @@
             <a class="nav-tel" href="tel:+525500000000" data-call aria-label="Llamar ahora">
                 <svg class="ic" width="18" height="18"><use href="#i-phone"/></svg>
                 <span data-phone-text>55&nbsp;0000&nbsp;0000</span>
-            </a>
-            <a class="btn btn-outline btn-sm nav-wa" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-                <svg class="ic ic-fill ic-wa" width="20" height="20"><use href="#i-wa"/></svg>
             </a>
             <a class="btn btn-primary btn-sm nav-cta" href="#contacto">Solicitar servicio</a>
             <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
@@ -208,7 +173,7 @@
         </nav>
         <div class="mm-foot">
             <a class="call-card" href="tel:+525500000000" data-call aria-label="Llamar ahora">
-                <span class="call-card__ico" aria-hidden="true"><svg class="ic" width="26" height="26"><use href="#i-phone"/></svg></span>
+                <svg class="ic" width="24" height="24" aria-hidden="true"><use href="#i-phone"/></svg>
                 <span class="call-card__txt"><small>Llámanos&nbsp;ahora</small><b data-phone-text>55&nbsp;0000&nbsp;0000</b></span>
             </a>
             <a class="btn btn-outline btn-lg btn-block" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener">
@@ -220,18 +185,26 @@
 
 <main id="main">
 
-<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<!-- ═══════════════════════════ HERO: la foto es el fondo de toda la sección ═══════════════════════════ -->
 <section id="inicio" class="hero" aria-labelledby="hero-title">
-    <div class="container hero-grid">
+    <div class="hero-bg" aria-hidden="true">
+        <!-- Foto de stock (Unsplash, licencia gratuita sin atribución). Reemplazar por una foto propia del cliente. -->
+        <img class="hero-img" src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=1400"
+             srcset="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
+             sizes="100vw" width="2000" height="1329" fetchpriority="high" decoding="async" alt="">
+    </div>
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <div class="container hero-in">
         <div class="hero-copy">
-            <p class="pill h-in" style="--i:0">Reparación a domicilio en CDMX y Edomex</p>
-            <h1 id="hero-title" class="h-in" style="--i:1">Centro de Servicio Técnico <span class="hl">Electrolux</span></h1>
-            <p class="lead h-in" style="--i:2">Reparamos refrigeradores, lavadoras, secadoras y estufas con refacciones originales y garantía por escrito.</p>
+            <p class="eyebrow h-in" style="--i:0">Reparación a domicilio en CDMX y Edomex</p>
+            <h1 id="hero-title" data-split>Centro de Servicio Técnico <span class="hl">Electrolux</span></h1>
+            <p class="lead h-in" style="--i:5">Reparación a domicilio de refrigeradores, lavadoras, secadoras y estufas, con refacciones originales y garantía por escrito.</p>
 
             <!-- El teléfono es el CTA principal: número grande, visible desde el primer segundo -->
-            <div class="hero-actions h-in" style="--i:3">
+            <div class="hero-actions h-in" style="--i:6">
                 <a class="call-card" href="tel:+525500000000" data-call aria-label="Llamar ahora">
-                    <span class="call-card__ico" aria-hidden="true"><svg class="ic" width="26" height="26"><use href="#i-phone"/></svg></span>
+                    <svg class="ic" width="24" height="24" aria-hidden="true"><use href="#i-phone"/></svg>
                     <span class="call-card__txt"><small>Llámanos&nbsp;ahora</small><b id="hero-phone-num" data-phone-text>55&nbsp;0000&nbsp;0000</b></span>
                 </a>
                 <a class="btn btn-outline btn-lg" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener">
@@ -239,347 +212,349 @@
                 </a>
             </div>
         </div>
-
-        <!-- Foto sobre un panel de fondo -->
-        <div class="hero-media h-in" style="--i:2">
-            <figure class="hero-photo">
-                <!-- Foto de stock (Unsplash, licencia gratuita sin atribución). Reemplazar por una foto propia del cliente. -->
-                <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=900"
-                     srcset="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=600 600w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=900 900w, https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&amp;fit=crop&amp;q=75&amp;w=1200 1200w"
-                     sizes="(min-width: 1024px) 500px, calc(100vw - 56px)"
-                     width="1200" height="797" fetchpriority="high" decoding="async"
-                     alt="Cocina moderna y luminosa con refrigerador de acero inoxidable, horno y gabinetes blancos">
-            </figure>
-            <div class="float-card fc-a">
-                <span class="icon-tile icon-tile--sm"><svg class="ic" width="20" height="20"><use href="#i-shield"/></svg></span>
-                <span><b>Garantía por escrito</b><small>En cada reparación</small></span>
-            </div>
-            <div class="float-card fc-b">
-                <span class="icon-tile icon-tile--sm"><svg class="ic" width="20" height="20"><use href="#i-bolt"/></svg></span>
-                <span><b>Servicio exprés</b><small>Mismo día*</small></span>
-            </div>
-        </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════ CONFIANZA ═══════════════════════════ -->
-<section class="trust" aria-label="Garantías del servicio">
+<!-- ═══════════════════════════ GARANTÍAS: franja que flota sobre el borde del hero ═══════════════════════════ -->
+<section class="facts" aria-label="Garantías del servicio">
     <div class="container">
-        <ul class="trust-card reveal">
-            <li><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-shield"/></svg></span><div><b>Garantía por escrito</b><span>Cada reparación queda documentada</span></div></li>
-            <li><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-gear"/></svg></span><div><b>Refacciones originales</b><span>Piezas de calidad de fábrica</span></div></li>
-            <li><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-bolt"/></svg></span><div><b>Servicio el mismo día</b><span>Sujeto a disponibilidad</span></div></li>
-            <li><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-pin"/></svg></span><div><b>CDMX y Edomex</b><span>Atención a domicilio</span></div></li>
+        <ul class="facts-list" data-stagger>
+            <li><b>Garantía por escrito</b><span>En cada reparación</span></li>
+            <li><b>Refacciones originales</b><span>Calidad de fábrica</span></li>
+            <li><b>Servicio el mismo día</b><span>Sujeto a disponibilidad</span></li>
+            <li><b>CDMX y Edomex</b><span>Atención a domicilio</span></li>
         </ul>
     </div>
 </section>
 
-<!-- ═══════════════════════════ SERVICIOS ═══════════════════════════ -->
-<section id="servicios" class="sec sec-soft" aria-labelledby="servicios-title">
-    <div class="container split">
-        <header class="sec-head split-aside">
-            <h2 id="servicios-title" class="reveal">Reparación de línea blanca Electrolux</h2>
-            <p class="lead reveal" style="--d:.08s">Diagnóstico profesional, refacciones originales y garantía por escrito, directamente en tu domicilio.</p>
-            <div class="also reveal" style="--d:.16s">
-                <p class="also-title">También atendemos</p>
-                <ul class="also-list">
-                    <li>Congeladores</li><li>Cavas de vino</li><li>Fábricas de hielo</li><li>Instalación</li><li>Mantenimiento preventivo</li>
-                </ul>
-            </div>
-            <a class="btn btn-primary btn-lg reveal" style="--d:.24s" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito servicio técnico para mi equipo Electrolux." target="_blank" rel="noopener">
-                <svg class="ic ic-fill" width="20" height="20"><use href="#i-wa"/></svg>Solicitar servicio
-            </a>
+<!-- ═══════════════════════════ FRANJA DE EQUIPOS (único marquee de la página) ═══════════════════════════ -->
+<div class="marquee" role="group" aria-label="Equipos que reparamos">
+    <div class="marquee-track">
+        <ul class="marquee-list">
+            <li>Refrigeradores</li><li>Lavadoras</li><li>Secadoras</li><li>Estufas</li><li>Hornos</li><li>Lavavajillas</li><li>Congeladores</li><li>Cavas de vino</li><li>Fábricas de hielo</li>
+        </ul>
+        <ul class="marquee-list" aria-hidden="true">
+            <li>Refrigeradores</li><li>Lavadoras</li><li>Secadoras</li><li>Estufas</li><li>Hornos</li><li>Lavavajillas</li><li>Congeladores</li><li>Cavas de vino</li><li>Fábricas de hielo</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ═══════════════════════════ SERVICIOS: lista con imagen fija que cambia al hacer scroll ═══════════════════════════ -->
+<section id="servicios" class="sec" aria-labelledby="servicios-title">
+    <div class="container">
+        <header class="sec-head">
+            <h2 id="servicios-title" data-split>Reparación de línea blanca Electrolux</h2>
+            <p class="lead reveal" style="--d:.1s">Diagnóstico profesional, refacciones originales y garantía por escrito, directamente en tu domicilio.</p>
         </header>
 
-        <div class="svc-grid">
-            <article class="svc reveal">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-fridge"/></svg></span>
-                <h3>Refrigeradores</h3>
-                <p>Side by Side, French Door, Top Mount y Bottom Freezer. Compresor, no-frost, tarjetas y sellos.</p>
-                <ul class="svc-tags"><li>No enfría</li><li>Gotea agua</li><li>Hace ruido</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi refrigerador Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
-            <article class="svc reveal" style="--d:.06s">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-washer"/></svg></span>
-                <h3>Lavadoras y centros de lavado</h3>
-                <p>Carga frontal y superior. Bombas, motores, amortiguadores y códigos de error.</p>
-                <ul class="svc-tags"><li>No desagua</li><li>No centrifuga</li><li>Fugas</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi lavadora Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
-            <article class="svc reveal" style="--d:.03s">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-dryer"/></svg></span>
-                <h3>Secadoras</h3>
-                <p>Resistencias, bandas, termostatos y sensores para recuperar el calor y el giro.</p>
-                <ul class="svc-tags"><li>No calienta</li><li>No gira</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi secadora Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
-            <article class="svc reveal" style="--d:.09s">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-stove"/></svg></span>
-                <h3>Estufas y parrillas</h3>
-                <p>Quemadores, ignición y válvulas, con la seguridad como prioridad en cada instalación de gas.</p>
-                <ul class="svc-tags"><li>Sin flama</li><li>No hace chispa</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi estufa o parrilla Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
-            <article class="svc reveal" style="--d:.06s">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-oven"/></svg></span>
-                <h3>Hornos</h3>
-                <p>Resistencias, termostatos, ventiladores de convección y controles digitales.</p>
-                <ul class="svc-tags"><li>No calienta</li><li>Temperatura errónea</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi horno Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
-            <article class="svc reveal" style="--d:.12s">
-                <span class="icon-tile"><svg class="ic" width="28" height="28"><use href="#i-dishwasher"/></svg></span>
-                <h3>Lavavajillas</h3>
-                <p>Drenado, bombas, brazos aspersores, sellos y paneles de control.</p>
-                <ul class="svc-tags"><li>No drena</li><li>No lava bien</li></ul>
-                <a class="svc-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi lavavajillas Electrolux." target="_blank" rel="noopener">Solicitar servicio <svg class="ic" width="16" height="16"><use href="#i-arrow"/></svg></a>
-            </article>
+        <div class="showcase" id="showcase">
+            <ul class="show-list" id="show-list">
+                <li class="show-item is-active" data-i="0">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/8289912/pexels-photo-8289912.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Persona abriendo un refrigerador en una cocina luminosa">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Refrigeradores</h3>
+                        <p class="show-desc">Side by Side, French Door, Top Mount y Bottom Freezer. Compresor, no-frost, tarjetas y sellos.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>No enfría, gotea agua, hace ruido</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi refrigerador Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para refrigerador">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+                <li class="show-item" data-i="1">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/11316620/pexels-photo-11316620.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Mano cargando ropa en el tambor de una lavadora">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Lavadoras y centros de lavado</h3>
+                        <p class="show-desc">Carga frontal y superior. Bombas, motores, amortiguadores y códigos de error.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>No desagua, no centrifuga, fugas</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi lavadora Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para lavadora">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+                <li class="show-item" data-i="2">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/7282793/pexels-photo-7282793.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Mujer sacando ropa de una secadora en un cuarto de lavado">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Secadoras</h3>
+                        <p class="show-desc">Resistencias, bandas, termostatos y sensores para recuperar el calor y el giro.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>No calienta, no gira</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi secadora Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para secadora">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+                <li class="show-item" data-i="3">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/6248774/pexels-photo-6248774.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Persona girando la perilla de una estufa de gas">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Estufas y parrillas</h3>
+                        <p class="show-desc">Quemadores, ignición y válvulas, con la seguridad como prioridad en cada instalación de gas.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>Sin flama, no hace chispa</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi estufa o parrilla Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para estufa o parrilla">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+                <li class="show-item" data-i="4">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/7045356/pexels-photo-7045356.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Horno empotrado con perillas en una cocina de madera">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Hornos</h3>
+                        <p class="show-desc">Resistencias, termostatos, ventiladores de convección y controles digitales.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>No calienta, temperatura errónea</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi horno Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para horno">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+                <li class="show-item" data-i="5">
+                    <figure class="show-media frame">
+                        <img src="https://images.pexels.com/photos/3829560/pexels-photo-3829560.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" width="800" height="533" loading="lazy" decoding="async" alt="Lavavajillas abierto con canastillas vacías en una cocina soleada">
+                    </figure>
+                    <div class="show-body">
+                        <h3>Lavavajillas</h3>
+                        <p class="show-desc">Drenado, bombas, brazos aspersores, sellos y paneles de control.</p>
+                        <p class="show-faults"><b>Fallas frecuentes</b>No drena, no lava bien</p>
+                        <a class="show-link" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, necesito reparar mi lavavajillas Electrolux." target="_blank" rel="noopener" aria-label="Solicitar servicio para lavavajillas">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Escenario fijo (sólo escritorio): cambia de imagen según el servicio que está a la vista -->
+            <div class="show-stage" aria-hidden="true">
+                <div class="show-frame">
+                    <img class="show-img is-active" src="https://images.pexels.com/photos/8289912/pexels-photo-8289912.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                    <img class="show-img" src="https://images.pexels.com/photos/11316620/pexels-photo-11316620.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                    <img class="show-img" src="https://images.pexels.com/photos/7282793/pexels-photo-7282793.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                    <img class="show-img" src="https://images.pexels.com/photos/6248774/pexels-photo-6248774.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                    <img class="show-img" src="https://images.pexels.com/photos/7045356/pexels-photo-7045356.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                    <img class="show-img" src="https://images.pexels.com/photos/3829560/pexels-photo-3829560.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" width="900" height="600" loading="lazy" decoding="async" alt="">
+                </div>
+            </div>
         </div>
+
+        <p class="also reveal">También atendemos congeladores, cavas de vino, fábricas de hielo, instalación y mantenimiento preventivo.</p>
     </div>
 </section>
 
-<!-- ═══════════════════════════ DIAGNÓSTICO INTERACTIVO ═══════════════════════════ -->
-<section id="diagnostico" class="sec" aria-labelledby="diag-title">
+<!-- ═══════════════════════════ DIAGNÓSTICO ═══════════════════════════ -->
+<section id="diagnostico" class="sec sec-soft" aria-labelledby="diag-title">
     <div class="container">
-        <header class="sec-head sec-head--center">
-            <h2 id="diag-title" class="reveal">Identifica la falla en tres pasos</h2>
-            <p class="lead reveal" style="--d:.08s">Elige tu equipo y el síntoma. Te mostramos la causa más común y preparamos tu solicitud para WhatsApp.</p>
+        <header class="sec-head">
+            <h2 id="diag-title" data-split>Identifica la falla en tres pasos</h2>
+            <p class="lead reveal" style="--d:.1s">Elige tu equipo y el síntoma. Te mostramos la causa más común y preparamos tu solicitud para WhatsApp.</p>
         </header>
 
         <div class="diag reveal" id="diag" style="--d:.12s">
-            <div class="diag-head">
-                <p class="diag-title">Asistente de diagnóstico</p>
-                <ol class="diag-steps" aria-label="Progreso del diagnóstico">
-                    <li class="is-active" data-s="1"><span>1</span>Equipo</li>
-                    <li data-s="2"><span>2</span>Síntoma</li>
-                    <li data-s="3"><span>3</span>Solicitud</li>
-                </ol>
-            </div>
+            <figure class="diag-aside frame" aria-hidden="true">
+                <!-- Foto de stock (Pexels, licencia gratuita). Reemplazar por una foto propia del cliente. -->
+                <img src="https://images.pexels.com/photos/35290678/pexels-photo-35290678.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" width="700" height="933" loading="lazy" decoding="async" alt="">
+            </figure>
 
-            <div class="diag-body">
-                <div class="diag-pane is-active" data-pane="1">
-                    <h3>¿Qué equipo necesita reparación?</h3>
-                    <div class="diag-grid" role="group" aria-label="Selecciona tu equipo">
-                        <button type="button" class="diag-opt" data-equip="refrigerador"><svg class="ic" width="30" height="30"><use href="#i-fridge"/></svg><span>Refrigerador</span></button>
-                        <button type="button" class="diag-opt" data-equip="lavadora"><svg class="ic" width="30" height="30"><use href="#i-washer"/></svg><span>Lavadora</span></button>
-                        <button type="button" class="diag-opt" data-equip="secadora"><svg class="ic" width="30" height="30"><use href="#i-dryer"/></svg><span>Secadora</span></button>
-                        <button type="button" class="diag-opt" data-equip="estufa"><svg class="ic" width="30" height="30"><use href="#i-stove"/></svg><span>Estufa o parrilla</span></button>
-                        <button type="button" class="diag-opt" data-equip="horno"><svg class="ic" width="30" height="30"><use href="#i-oven"/></svg><span>Horno</span></button>
-                        <button type="button" class="diag-opt" data-equip="lavavajillas"><svg class="ic" width="30" height="30"><use href="#i-dishwasher"/></svg><span>Lavavajillas</span></button>
-                        <button type="button" class="diag-opt diag-opt--wide" data-equip="otro"><svg class="ic" width="30" height="30"><use href="#i-freezer"/></svg><span>Congelador, cava de vino u otro</span></button>
-                    </div>
+            <div class="diag-main">
+                <div class="diag-head">
+                    <p class="diag-title">Asistente de diagnóstico</p>
+                    <ol class="diag-steps" aria-label="Progreso del diagnóstico">
+                        <li class="is-active" data-s="1">Equipo</li>
+                        <li data-s="2">Síntoma</li>
+                        <li data-s="3">Solicitud</li>
+                    </ol>
+                    <span class="diag-bar" aria-hidden="true"><i id="diag-bar"></i></span>
                 </div>
 
-                <div class="diag-pane" data-pane="2">
-                    <h3>¿Qué síntoma presenta tu <span id="diag-equip-name">equipo</span>?</h3>
-                    <div class="diag-issues" id="diag-issues" role="group" aria-label="Selecciona el síntoma"></div>
-                    <button type="button" class="diag-back" data-back="1"><svg class="ic" width="16" height="16" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg>Cambiar equipo</button>
-                </div>
-
-                <div class="diag-pane" data-pane="3">
-                    <div class="diag-scan" id="diag-scan" aria-hidden="true"><span></span><p>Buscando causas frecuentes</p></div>
-                    <div class="diag-result" id="diag-result">
-                        <p class="diag-tag">Causa más frecuente</p>
-                        <h3 id="diag-res-title" tabindex="-1">Diagnóstico</h3>
-                        <p class="diag-cause" id="diag-res-cause"></p>
-                        <p class="diag-warn" id="diag-res-warn" hidden></p>
-                        <p class="diag-note">Es una orientación general. El diagnóstico definitivo lo confirma nuestro técnico en tu domicilio.</p>
-
-                        <label class="diag-zone">
-                            <span>Alcaldía o municipio (opcional)</span>
-                            <input id="diag-zone" type="text" placeholder="Ej. Coyoacán o Naucalpan" autocomplete="address-level2">
-                        </label>
-
-                        <div class="diag-actions">
-                            <a class="btn btn-primary btn-lg" id="diag-wa" href="https://wa.me/525500000000" target="_blank" rel="noopener">
-                                <svg class="ic ic-fill" width="20" height="20"><use href="#i-wa"/></svg>Enviar por WhatsApp
-                            </a>
-                            <a class="btn btn-outline btn-lg" href="tel:+525500000000" data-call>
-                                <svg class="ic" width="18" height="18"><use href="#i-phone"/></svg>Llamar&nbsp;ahora
-                            </a>
+                <div class="diag-body">
+                    <div class="diag-pane is-active" data-pane="1">
+                        <h3>¿Qué equipo necesita reparación?</h3>
+                        <div class="diag-grid" role="group" aria-label="Selecciona tu equipo">
+                            <button type="button" class="diag-opt" data-equip="refrigerador"><span>Refrigerador</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt" data-equip="lavadora"><span>Lavadora</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt" data-equip="secadora"><span>Secadora</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt" data-equip="estufa"><span>Estufa o parrilla</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt" data-equip="horno"><span>Horno</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt" data-equip="lavavajillas"><span>Lavavajillas</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+                            <button type="button" class="diag-opt diag-opt--wide" data-equip="otro"><span>Congelador, cava de vino u otro</span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></button>
                         </div>
-                        <button type="button" class="diag-back" data-back="1">Empezar de nuevo</button>
+                    </div>
+
+                    <div class="diag-pane" data-pane="2">
+                        <h3>¿Qué síntoma presenta tu <span id="diag-equip-name">equipo</span>?</h3>
+                        <div class="diag-issues" id="diag-issues" role="group" aria-label="Selecciona el síntoma"></div>
+                        <button type="button" class="diag-back" data-back="1">Cambiar equipo</button>
+                    </div>
+
+                    <div class="diag-pane" data-pane="3">
+                        <div class="diag-result" id="diag-result">
+                            <p class="diag-tag">Causa más frecuente</p>
+                            <h3 id="diag-res-title" tabindex="-1">Diagnóstico</h3>
+                            <p class="diag-cause" id="diag-res-cause"></p>
+                            <p class="diag-warn" id="diag-res-warn" hidden></p>
+                            <p class="diag-note">Es una orientación general. El diagnóstico definitivo lo confirma nuestro técnico en tu domicilio.</p>
+
+                            <label class="diag-zone">
+                                <span>Alcaldía o municipio (opcional)</span>
+                                <input id="diag-zone" type="text" placeholder="Ej. Coyoacán o Naucalpan" autocomplete="address-level2">
+                            </label>
+
+                            <div class="diag-actions">
+                                <a class="btn btn-primary btn-lg" id="diag-wa" href="https://wa.me/525500000000" target="_blank" rel="noopener">
+                                    <svg class="ic ic-fill" width="20" height="20"><use href="#i-wa"/></svg>Enviar por WhatsApp
+                                </a>
+                                <a class="btn btn-outline btn-lg" href="tel:+525500000000" data-call>
+                                    <svg class="ic" width="18" height="18"><use href="#i-phone"/></svg>Llamar&nbsp;ahora
+                                </a>
+                            </div>
+                            <button type="button" class="diag-back" data-back="1">Empezar de nuevo</button>
+                        </div>
                     </div>
                 </div>
+                <noscript><p class="diag-noscript">Activa JavaScript para usar el asistente o contáctanos directamente por teléfono o WhatsApp.</p></noscript>
             </div>
-            <noscript><p class="diag-noscript">Activa JavaScript para usar el asistente o contáctanos directamente por teléfono o WhatsApp.</p></noscript>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════ GARANTÍA ═══════════════════════════ -->
-<section id="garantia" class="sec sec-soft" aria-labelledby="gar-title">
+<!-- ═══════════════════════════ FRANJA DE CIFRAS: foto de fondo con panel blanco ═══════════════════════════ -->
+<section class="band" aria-labelledby="band-title">
+    <div class="band-bg frame" aria-hidden="true">
+        <!-- Foto de stock (Pexels, licencia gratuita). Reemplazar por una foto propia del cliente. -->
+        <img src="https://images.pexels.com/photos/37340084/pexels-photo-37340084.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" width="1600" height="1067" loading="lazy" decoding="async" alt="">
+    </div>
+    <div class="container">
+        <div class="band-panel reveal-l">
+            <h2 id="band-title">Respaldo real en cada reparación</h2>
+            <p class="lead">Cotización clara antes de empezar, refacciones originales y garantía por escrito al terminar.</p>
+            <dl class="stats">
+                <div><dt><span class="count" data-count="11">11</span></dt><dd>tipos de equipo que reparamos</dd></div>
+                <div><dt><span class="count" data-count="23">23</span></dt><dd>alcaldías y municipios en cobertura</dd></div>
+                <div><dt><span class="count" data-count="7">7</span></dt><dd>días de atención a la semana</dd></div>
+            </dl>
+            <a class="btn btn-primary btn-lg" href="#contacto">Solicitar servicio<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════ PROCESO Y GARANTÍA ═══════════════════════════ -->
+<section id="proceso" class="sec" aria-labelledby="proceso-title">
     <div class="container split split--media">
-        <figure class="gar-photo reveal">
+        <figure class="proc-photo frame reveal-zoom">
             <!-- Foto de stock (Pexels, licencia gratuita). Reemplazar por una foto propia del equipo del cliente. -->
             <img src="https://images.pexels.com/photos/38190070/pexels-photo-38190070.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800"
                  srcset="https://images.pexels.com/photos/38190070/pexels-photo-38190070.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=560 560w, https://images.pexels.com/photos/38190070/pexels-photo-38190070.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800 800w, https://images.pexels.com/photos/38190070/pexels-photo-38190070.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100 1100w"
                  sizes="(min-width: 1024px) 480px, calc(100vw - 40px)"
                  width="800" height="1067" loading="lazy" decoding="async"
                  alt="Técnico especializado revisando el panel de un electrodoméstico">
-            <figcaption class="gar-badge">
-                <span class="icon-tile icon-tile--sm"><svg class="ic" width="20" height="20"><use href="#i-cert"/></svg></span>
-                <span><b>Técnicos capacitados</b><small>Especialistas en línea blanca</small></span>
-            </figcaption>
         </figure>
 
-        <div class="gar-copy">
+        <div class="proc-copy">
             <header class="sec-head">
-                <h2 id="gar-title" class="reveal">Respaldo real en cada reparación</h2>
-                <p class="lead reveal" style="--d:.08s">Un proceso claro para que sepas qué se repara, cuánto cuesta y qué cubre tu garantía.</p>
+                <h2 id="proceso-title" data-split>Así funciona el servicio</h2>
+                <p class="lead reveal" style="--d:.1s">Del primer contacto a tu equipo funcionando, con cotización clara y garantía por escrito.</p>
             </header>
 
-            <ul class="commit">
-                <li class="reveal"><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-shield"/></svg></span><div><h3>Garantía por escrito</h3><p>Documentamos cada reparación y su cobertura.</p></div></li>
-                <li class="reveal" style="--d:.06s"><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-gear"/></svg></span><div><h3>Refacciones originales</h3><p>Piezas que respetan las especificaciones de tu equipo.</p></div></li>
-                <li class="reveal" style="--d:.12s"><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-tag"/></svg></span><div><h3>Cotización clara</h3><p>Te explicamos la falla y el costo antes de iniciar.</p></div></li>
-                <li class="reveal" style="--d:.18s"><span class="icon-tile"><svg class="ic" width="24" height="24"><use href="#i-tool"/></svg></span><div><h3>Instalación y mantenimiento</h3><p>Instalamos tu equipo nuevo y hacemos mantenimiento preventivo.</p></div></li>
-            </ul>
-
-            <dl class="stats reveal">
-                <div><dt><span class="counter" data-target="11">11</span></dt><dd>tipos de equipos que reparamos</dd></div>
-                <div><dt><span class="counter" data-target="2">2</span></dt><dd>entidades: CDMX y Estado de México</dd></div>
-                <div><dt><span class="counter" data-target="7">7</span><i>/7</i></dt><dd>días de atención a la semana</dd></div>
-            </dl>
-
-            <a class="btn btn-primary btn-lg reveal" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, quiero agendar una visita técnica para mi equipo Electrolux." target="_blank" rel="noopener">
-                <svg class="ic ic-fill" width="20" height="20"><use href="#i-wa"/></svg>Agendar visita
-            </a>
+            <ol class="steps" id="steps">
+                <li class="step reveal">
+                    <h3>Contacto</h3>
+                    <p>Llama o escribe por WhatsApp con el equipo, el modelo y la falla.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Visita</h3>
+                    <p>Coordinamos día y horario en tu domicilio. Exprés el mismo día, sujeto a disponibilidad.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Diagnóstico</h3>
+                    <p>Revisamos tu equipo, te explicamos la falla y cotizamos antes de tocar nada.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Reparación</h3>
+                    <p>Trabajamos con refacciones originales y herramienta especializada.</p>
+                </li>
+                <li class="step reveal">
+                    <h3>Garantía</h3>
+                    <p>Probamos el equipo contigo y te entregamos la garantía por escrito.</p>
+                </li>
+            </ol>
         </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════ PROCESO ═══════════════════════════ -->
-<section id="proceso" class="sec" aria-labelledby="proceso-title">
-    <div class="container">
-        <header class="sec-head">
-            <h2 id="proceso-title" class="reveal">Así funciona el servicio</h2>
-            <p class="lead reveal" style="--d:.08s">Cinco pasos claros, de tu llamada a tu equipo funcionando.</p>
-        </header>
-
-        <ol class="steps" id="steps">
-            <li class="step" style="--i:0">
-                <span class="step-num">1</span>
-                <h3>Contáctanos</h3>
-                <p>Llama o escribe por WhatsApp con el equipo, el modelo y la falla.</p>
-            </li>
-            <li class="step" style="--i:1">
-                <span class="step-num">2</span>
-                <h3>Agenda tu visita</h3>
-                <p>Coordinamos día y horario en tu domicilio. Exprés el mismo día, sujeto a disponibilidad.</p>
-            </li>
-            <li class="step" style="--i:2">
-                <span class="step-num">3</span>
-                <h3>Diagnóstico en sitio</h3>
-                <p>Revisamos tu equipo, te explicamos la falla y cotizamos antes de tocar nada.</p>
-            </li>
-            <li class="step" style="--i:3">
-                <span class="step-num">4</span>
-                <h3>Reparación</h3>
-                <p>Trabajamos con refacciones originales y herramienta especializada.</p>
-            </li>
-            <li class="step" style="--i:4">
-                <span class="step-num">5</span>
-                <h3>Garantía por escrito</h3>
-                <p>Probamos el equipo contigo y te entregamos la garantía documentada.</p>
-            </li>
-        </ol>
     </div>
 </section>
 
 <!-- ═══════════════════════════ COBERTURA ═══════════════════════════ -->
 <section id="cobertura" class="sec sec-soft" aria-labelledby="cob-title">
-    <div class="container split split--even">
-        <div class="cov-copy">
-            <header class="sec-head">
-                <h2 id="cob-title" class="reveal">Cobertura en CDMX y Estado de México</h2>
-                <p class="lead reveal" style="--d:.08s">Atendemos las principales alcaldías y municipios. Si tu zona no aparece, escríbenos y confirmamos cobertura.</p>
-            </header>
+    <div class="container">
+        <figure class="cov-banner frame reveal-zoom">
+            <!-- Foto de stock (Pexels, licencia gratuita). -->
+            <img src="https://images.pexels.com/photos/13360597/pexels-photo-13360597.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" width="1400" height="933" loading="lazy" decoding="async" alt="Vista aérea de la Ciudad de México con calles del centro histórico y edificios hasta el horizonte">
+        </figure>
 
-            <div class="zones reveal" style="--d:.14s">
-                <div class="zone">
-                    <h3>Ciudad de México</h3>
-                    <ul>
-                        <li>Álvaro Obregón</li><li>Azcapotzalco</li><li>Benito Juárez</li><li>Coyoacán</li><li>Cuajimalpa</li><li>Cuauhtémoc</li><li>Gustavo A. Madero</li><li>Iztacalco</li><li>Iztapalapa</li><li>Magdalena Contreras</li><li>Miguel Hidalgo</li><li>Tlalpan</li><li>Venustiano Carranza</li><li>Xochimilco</li>
-                    </ul>
+        <div class="split split--even">
+            <div class="cov-copy">
+                <header class="sec-head">
+                    <h2 id="cob-title" data-split>Cobertura en CDMX y Estado de México</h2>
+                    <p class="lead reveal" style="--d:.1s">Atendemos las principales alcaldías y municipios. Si tu zona no aparece, escríbenos y confirmamos cobertura.</p>
+                </header>
+
+                <div class="zones">
+                    <div class="zone">
+                        <h3>Ciudad de México</h3>
+                        <ul data-stagger>
+                            <li>Álvaro Obregón</li><li>Azcapotzalco</li><li>Benito Juárez</li><li>Coyoacán</li><li>Cuajimalpa</li><li>Cuauhtémoc</li><li>Gustavo A. Madero</li><li>Iztacalco</li><li>Iztapalapa</li><li>Magdalena Contreras</li><li>Miguel Hidalgo</li><li>Tlalpan</li><li>Venustiano Carranza</li><li>Xochimilco</li>
+                        </ul>
+                    </div>
+                    <div class="zone">
+                        <h3>Estado de México</h3>
+                        <ul data-stagger>
+                            <li>Naucalpan de Juárez</li><li>Huixquilucan</li><li>Tlalnepantla</li><li>Atizapán de Zaragoza</li><li>Cuautitlán Izcalli</li><li>Ecatepec</li><li>Nezahualcóyotl</li><li>Coacalco</li><li>Tecámac</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="zone">
-                    <h3>Estado de México</h3>
-                    <ul>
-                        <li>Naucalpan de Juárez</li><li>Huixquilucan</li><li>Tlalnepantla</li><li>Atizapán de Zaragoza</li><li>Cuautitlán Izcalli</li><li>Ecatepec</li><li>Nezahualcóyotl</li><li>Coacalco</li><li>Tecámac</li>
-                    </ul>
-                </div>
+
+                <a class="btn btn-outline btn-lg reveal" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, quiero confirmar si tienen cobertura en mi zona. Mi colonia y municipio es: " target="_blank" rel="noopener">
+                    <svg class="ic ic-fill ic-wa" width="20" height="20"><use href="#i-wa"/></svg>Confirmar cobertura
+                </a>
             </div>
 
-            <a class="btn btn-primary btn-lg reveal" style="--d:.2s" href="https://wa.me/525500000000" data-wa data-wa-text="Hola, quiero confirmar si tienen cobertura en mi zona. Mi colonia y municipio es: " target="_blank" rel="noopener">
-                <svg class="ic ic-fill" width="20" height="20"><use href="#i-wa"/></svg>Confirmar cobertura
-            </a>
+            <figure class="map frame reveal-zoom">
+                <iframe title="Mapa de cobertura: Ciudad de México y zona metropolitana"
+                        src="https://maps.google.com/maps?q=Ciudad%20de%20M%C3%A9xico&amp;z=10&amp;output=embed"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </figure>
         </div>
-
-        <figure class="map reveal" style="--d:.1s">
-            <iframe title="Mapa de cobertura: Ciudad de México y zona metropolitana"
-                    src="https://maps.google.com/maps?q=Ciudad%20de%20M%C3%A9xico&amp;z=10&amp;output=embed"
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </figure>
     </div>
 </section>
 
 <!-- ═══════════════════════════ FAQ ═══════════════════════════ -->
 <section id="faq" class="sec" aria-labelledby="faq-title">
     <div class="container">
-        <header class="sec-head sec-head--center">
-            <h2 id="faq-title" class="reveal">Preguntas frecuentes</h2>
-            <p class="lead reveal" style="--d:.08s">Resolvemos tus dudas antes de que llames.</p>
+        <header class="sec-head">
+            <h2 id="faq-title" data-split>Preguntas frecuentes</h2>
+            <p class="lead reveal" style="--d:.1s">Resolvemos tus dudas antes de que llames.</p>
         </header>
 
-        <div class="faq" id="faq-list">
-            <div class="faq-item reveal is-open">
+        <div class="faq" id="faq-list" data-stagger>
+            <div class="faq-item is-open">
                 <h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa-1" id="fq-1"><span>¿Atienden a domicilio en CDMX y Estado de México?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-1" role="region" aria-labelledby="fq-1"><div><p>Sí. Vamos a tu domicilio en la Ciudad de México y en los principales municipios del Estado de México. Si tu zona no aparece en la lista, escríbenos por WhatsApp y confirmamos cobertura.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.04s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-2" id="fq-2"><span>¿Qué equipos Electrolux reparan?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-2" role="region" aria-labelledby="fq-2"><div><p>Refrigeradores, congeladores, cavas de vino, fábricas de hielo, lavadoras, centros de lavado, secadoras, estufas, parrillas, hornos y lavavajillas. También realizamos instalación y mantenimiento preventivo.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.08s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-3" id="fq-3"><span>¿Cuánto tarda la reparación?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-3" role="region" aria-labelledby="fq-3"><div><p>En muchos casos el diagnóstico y la reparación se realizan en la misma visita. Si la falla requiere una refacción especial, te informamos el tiempo estimado antes de continuar.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.12s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-4" id="fq-4"><span>¿Usan refacciones originales?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-4" role="region" aria-labelledby="fq-4"><div><p>Sí. Trabajamos con refacciones originales para que tu equipo conserve su rendimiento y su vida útil.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.16s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-5" id="fq-5"><span>¿Las reparaciones tienen garantía?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-5" role="region" aria-labelledby="fq-5"><div><p>Sí. Cada reparación se entrega con garantía por escrito.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.2s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-6" id="fq-6"><span>¿Cuánto cuesta la reparación?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-6" role="region" aria-labelledby="fq-6"><div><p>El costo depende del equipo y de la falla. Un técnico revisa tu equipo y te da una cotización clara antes de iniciar cualquier reparación.</p></div></div>
             </div>
-            <div class="faq-item reveal" style="--d:.24s">
+            <div class="faq-item">
                 <h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-7" id="fq-7"><span>¿Cómo agendo una visita?</span><i aria-hidden="true"></i></button></h3>
                 <div class="faq-a" id="fa-7" role="region" aria-labelledby="fq-7"><div><p>Llámanos, escríbenos por WhatsApp o llena el formulario de esta página. Te confirmamos día y horario de visita, con opción de servicio exprés el mismo día sujeto a disponibilidad.</p></div></div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════ CTA FINAL ═══════════════════════════ -->
-<section id="cta" class="cta" aria-labelledby="cta-title">
-    <div class="container cta-in">
-        <div class="cta-copy">
-            <h2 id="cta-title" class="reveal">¿Tu equipo Electrolux dejó de funcionar?</h2>
-            <p class="reveal" style="--d:.08s">Llámanos o escríbenos y agendamos tu visita técnica.</p>
-        </div>
-        <div class="cta-actions reveal" style="--d:.12s">
-            <a class="call-card call-card--light" href="tel:+525500000000" data-call aria-label="Llamar ahora">
-                <span class="call-card__ico" aria-hidden="true"><svg class="ic" width="26" height="26"><use href="#i-phone"/></svg></span>
-                <span class="call-card__txt"><small>Llámanos&nbsp;ahora</small><b data-phone-text>55&nbsp;0000&nbsp;0000</b></span>
-            </a>
-            <a class="btn btn-ghost-light btn-lg" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener">
-                <svg class="ic ic-fill" width="22" height="22"><use href="#i-wa"/></svg>Escribir por WhatsApp
-            </a>
         </div>
     </div>
 </section>
@@ -589,32 +564,32 @@
     <div class="container split split--form">
         <div class="contact-info">
             <header class="sec-head">
-                <h2 id="contacto-title" class="reveal">Solicita tu servicio técnico</h2>
-                <p class="lead reveal" style="--d:.08s">Completa el formulario y abrimos tu solicitud en WhatsApp para atenderte al instante.</p>
+                <h2 id="contacto-title" data-split>Solicita tu servicio técnico</h2>
+                <p class="lead reveal" style="--d:.1s">Completa el formulario y abrimos tu solicitud en WhatsApp para atenderte al instante.</p>
             </header>
 
-            <address class="contact-list reveal" style="--d:.14s">
-                <a class="c-row" href="tel:+525500000000" data-call>
-                    <span class="icon-tile"><svg class="ic" width="22" height="22"><use href="#i-phone"/></svg></span>
-                    <span><small>Teléfono</small><strong data-phone-text>55&nbsp;0000&nbsp;0000</strong></span>
+            <address class="contact-list" data-stagger>
+                <a class="c-row c-row--phone" href="tel:+525500000000" data-call>
+                    <small>Teléfono</small>
+                    <strong data-phone-text>55&nbsp;0000&nbsp;0000</strong>
                 </a>
                 <a class="c-row" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener">
-                    <span class="icon-tile"><svg class="ic ic-fill" width="22" height="22"><use href="#i-wa"/></svg></span>
-                    <span><small>WhatsApp</small><strong data-phone-text>55&nbsp;0000&nbsp;0000</strong></span>
+                    <small>WhatsApp</small>
+                    <strong data-phone-text>55&nbsp;0000&nbsp;0000</strong>
                 </a>
                 <!-- TODO: confirmar horario real con el cliente -->
                 <div class="c-row">
-                    <span class="icon-tile"><svg class="ic" width="22" height="22"><use href="#i-clock"/></svg></span>
-                    <span><small>Horario</small><strong>Atención los 7 días de la semana</strong></span>
+                    <small>Horario</small>
+                    <strong>Atención los 7 días de la semana</strong>
                 </div>
                 <div class="c-row">
-                    <span class="icon-tile"><svg class="ic" width="22" height="22"><use href="#i-pin"/></svg></span>
-                    <span><small>Cobertura</small><strong>CDMX y Estado de México</strong></span>
+                    <small>Cobertura</small>
+                    <strong>CDMX y Estado de México</strong>
                 </div>
             </address>
         </div>
 
-        <div class="form-card reveal" style="--d:.1s">
+        <div class="form-card reveal-r">
             <h3>Cuéntanos qué necesitas</h3>
             <p class="form-sub">Te respondemos en minutos por WhatsApp.</p>
             <form id="wa-form" novalidate>
@@ -664,25 +639,24 @@
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
 <footer class="footer">
     <div class="container">
-        <div class="foot-top">
+        <div class="foot-top" data-stagger>
             <div class="foot-brand">
                 <a class="brand" href="#inicio" aria-label="Volver al inicio">
-                    <svg class="brand-mark" viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><use href="#logo-mark"/></svg>
+                    <svg class="brand-mark" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true"><use href="#logo-mark"/></svg>
                     <span class="brand-text"><b>Servicio Técnico</b><small>Electrolux CDMX y Edomex</small></span>
                 </a>
                 <p>Centro de servicio técnico especializado en equipos Electrolux. Reparación, instalación y mantenimiento de línea blanca en la Ciudad de México y el Estado de México.</p>
                 <a class="foot-tel" href="tel:+525500000000" data-call>
-                    <svg class="ic" width="20" height="20"><use href="#i-phone"/></svg><span data-phone-text>55&nbsp;0000&nbsp;0000</span>
+                    <svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-phone"/></svg><span data-phone-text>55&nbsp;0000&nbsp;0000</span>
                 </a>
             </div>
             <nav class="foot-col" aria-label="Servicios">
                 <h4>Servicios</h4>
                 <ul>
-                    <li><a href="#servicios">Reparación de refrigeradores</a></li>
-                    <li><a href="#servicios">Reparación de lavadoras</a></li>
-                    <li><a href="#servicios">Reparación de secadoras</a></li>
-                    <li><a href="#servicios">Reparación de estufas y hornos</a></li>
-                    <li><a href="#servicios">Reparación de lavavajillas</a></li>
+                    <li><a href="#servicios">Refrigeradores</a></li>
+                    <li><a href="#servicios">Lavadoras y secadoras</a></li>
+                    <li><a href="#servicios">Estufas y hornos</a></li>
+                    <li><a href="#servicios">Lavavajillas</a></li>
                 </ul>
             </nav>
             <nav class="foot-col" aria-label="Empresa">
@@ -695,14 +669,6 @@
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
-            <div class="foot-col">
-                <h4>Cobertura</h4>
-                <ul>
-                    <li>Ciudad de México</li>
-                    <li>Estado de México</li>
-                    <li>Zona metropolitana</li>
-                </ul>
-            </div>
         </div>
         <div class="foot-bottom">
             <p>© <span id="year">2026</span> Centro de Servicio Técnico Electrolux. Todos los derechos reservados.</p>
@@ -714,11 +680,11 @@
 <!-- ═══════════════════════════ FLOTANTES ═══════════════════════════ -->
 <aside class="quick-contact" aria-label="Contacto rápido">
     <a class="call-float" href="tel:+525500000000" data-call aria-label="Llamar ahora">
-        <svg class="ic" width="22" height="22"><use href="#i-phone"/></svg><span>Llamar</span>
+        <svg class="ic" width="20" height="20"><use href="#i-phone"/></svg><span>Llamar</span>
     </a>
     <a class="wa-float" href="https://wa.me/525500000000" data-wa target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
         <span class="wa-tip">¿Necesitas ayuda? Escríbenos</span>
-        <span class="wa-btn"><svg class="ic ic-fill" width="30" height="30"><use href="#i-wa"/></svg></span>
+        <span class="wa-btn"><svg class="ic ic-fill" width="28" height="28"><use href="#i-wa"/></svg></span>
     </a>
 </aside>
 

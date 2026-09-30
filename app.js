@@ -1,7 +1,7 @@
 /* ==========================================================================
    SERVICIO TÉCNICO ELECTROLUX · CDMX Y EDOMEX · app.js
    Sin dependencias. Sin listeners de scroll: el movimiento ligado al scroll usa
-   IntersectionObserver y CSS scroll-driven animations (ver styles.css).
+   IntersectionObserver y CSS scroll-driven animations (ver styles.css, sección 18).
    ========================================================================== */
 (() => {
     'use strict';
@@ -23,6 +23,7 @@
     const html = document.documentElement;
     const body = document.body;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasIO = 'IntersectionObserver' in window;
     const safe = (name, fn) => { try { fn(); } catch (err) { console.error('[app.js] ' + name, err); } };
     const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -32,7 +33,7 @@
     /* ─────────────── CONTACTO: teléfono y WhatsApp ─────────────── */
     const digits = CONFIG.phone.replace(/\D/g, '');
     // Espacios no separables: el número nunca se parte en dos líneas
-    const NBSP = '\u00a0';
+    const NBSP = ' ';
     const display = (CONFIG.phoneDisplay ||
         (digits.length === 10 ? `${digits.slice(0, 2)} ${digits.slice(2, 6)} ${digits.slice(6)}` : digits)).replace(/ /g, NBSP);
     const telHref = `tel:+${CONFIG.countryCode}${digits}`;
@@ -56,10 +57,59 @@
         if (year) year.textContent = new Date().getFullYear();
     }
 
-    /* ─────────────── REVELADO AL ENTRAR EN PANTALLA ─────────────── */
+    /* ─────────────── TÍTULOS POR PALABRAS ───────────────
+       Cada palabra queda dentro de una máscara (.w) y sube (.wi) con retraso escalonado.
+       El título conserva su texto completo para lectores de pantalla (aria-label). */
+    function initSplit() {
+        let n;
+        const wrapNode = (node) => {
+            Array.from(node.childNodes).forEach((child) => {
+                if (child.nodeType === 3) {
+                    const parts = child.textContent.split(/(\s+)/);
+                    const frag = document.createDocumentFragment();
+                    parts.forEach((p) => {
+                        if (!p) return;
+                        if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(' ')); return; }
+                        const w = document.createElement('span');
+                        w.className = 'w';
+                        const wi = document.createElement('span');
+                        wi.className = 'wi';
+                        wi.style.setProperty('--wi', n++);
+                        wi.textContent = p;
+                        w.appendChild(wi);
+                        frag.appendChild(w);
+                    });
+                    node.replaceChild(frag, child);
+                } else if (child.nodeType === 1) {
+                    wrapNode(child);
+                }
+            });
+        };
+        $$('[data-split]').forEach((el) => {
+            const label = el.textContent.replace(/\s+/g, ' ').trim();
+            n = 0;
+            wrapNode(el);
+            el.setAttribute('aria-label', label);
+            $$('.w', el).forEach((w) => w.setAttribute('aria-hidden', 'true'));
+        });
+    }
+
+    /* ─────────────── REVELADO AL ENTRAR EN PANTALLA ───────────────
+       [data-stagger] reparte un retraso creciente entre sus hijos (valor en ms, 70 por defecto). */
+    function initStagger() {
+        $$('[data-stagger]').forEach((box) => {
+            const step = Number(box.dataset.stagger) || 70;
+            Array.from(box.children).forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.setProperty('--d', `${(Math.min(i, 10) * step) / 1000}s`);
+            });
+        });
+    }
+
     function initReveal() {
-        const targets = $$('.reveal, .step');
-        if (!('IntersectionObserver' in window)) { targets.forEach((el) => el.classList.add('is-in')); return; }
+        // El título del hero se anima con el loader (CSS), no con el observador
+        const targets = $$('.reveal, .reveal-l, .reveal-r, .reveal-zoom, .frame, [data-split]').filter((el) => !el.closest('.hero'));
+        if (!hasIO) { targets.forEach((el) => el.classList.add('is-in')); return; }
         const io = new IntersectionObserver((entries) => {
             entries.forEach((e) => {
                 // También se marcan los que quedaron por encima del viewport (recarga a mitad de página)
@@ -76,13 +126,13 @@
     function initHeader() {
         const header = $('#site-header');
         const sentinel = $('#top-sentinel');
-        if (header && sentinel && 'IntersectionObserver' in window) {
+        if (header && sentinel && hasIO) {
             new IntersectionObserver(([e]) => header.classList.toggle('is-stuck', !e.isIntersecting)).observe(sentinel);
         }
         const links = $$('.nav-links a');
         const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
-        if (!byId.size || !('IntersectionObserver' in window)) return;
-        // Se observan todas las secciones: en las que no tienen enlace propio (p. ej. Garantía) se apaga el resaltado
+        if (!byId.size || !hasIO) return;
+        // Se observan todas las secciones: en las que no tienen enlace propio se apaga el resaltado
         const spy = new IntersectionObserver((entries) => {
             entries.forEach((e) => {
                 if (!e.isIntersecting) return;
@@ -127,6 +177,36 @@
                 items.forEach((i) => { i.classList.remove('is-open'); $('.faq-q', i).setAttribute('aria-expanded', 'false'); });
                 if (willOpen) { item.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
             });
+        });
+    }
+
+    /* ─────────────── SERVICIOS: imagen fija que cambia con el servicio a la vista ───────────────
+       En escritorio el escenario (.show-stage) queda fijo y cambia de foto según el elemento de la lista
+       que cruza el centro de la pantalla. En móvil cada servicio lleva su foto en línea. */
+    function initShowcase() {
+        const list = $('#show-list');
+        if (!list) return;
+        const items = $$('.show-item', list);
+        const imgs = $$('.show-stage .show-img');
+        const desk = matchMedia('(min-width: 1024px)');
+        let cur = -1;
+        const set = (i) => {
+            if (i === cur || i < 0) return;
+            cur = i;
+            items.forEach((it, k) => it.classList.toggle('is-active', k === i));
+            imgs.forEach((im, k) => im.classList.toggle('is-active', k === i));
+            list.style.setProperty('--p', ((i + 1) / items.length).toFixed(3));
+        };
+        set(0);
+        if (!hasIO) return;
+        const io = new IntersectionObserver((entries) => {
+            if (!desk.matches) return;
+            entries.forEach((e) => { if (e.isIntersecting) set(items.indexOf(e.target)); });
+        }, { rootMargin: '-42% 0px -42% 0px' });
+        items.forEach((it, i) => {
+            io.observe(it);
+            it.addEventListener('mouseenter', () => { if (desk.matches) set(i); });
+            it.addEventListener('focusin', () => { if (desk.matches) set(i); });
         });
     }
 
@@ -186,6 +266,7 @@
         if (!root) return;
         const panes = $$('.diag-pane', root);
         const steps = $$('.diag-steps li', root);
+        const bar = $('#diag-bar');
         const nameEl = $('#diag-equip-name');
         const issuesEl = $('#diag-issues');
         const resTitle = $('#diag-res-title');
@@ -194,21 +275,17 @@
         const waBtn = $('#diag-wa');
         const zone = $('#diag-zone');
         const state = { equip: null, issue: null };
-        let scanTimer = 0;
 
         const paneOf = (n) => panes.find((p) => Number(p.dataset.pane) === n);
 
         function go(n) {
-            panes.forEach((p) => {
-                const on = Number(p.dataset.pane) === n;
-                p.classList.toggle('is-active', on);
-                if (!on) p.classList.remove('is-scanning');
-            });
+            panes.forEach((p) => p.classList.toggle('is-active', Number(p.dataset.pane) === n));
             steps.forEach((s) => {
                 const k = Number(s.dataset.s);
                 s.classList.toggle('is-active', k === n);
                 s.classList.toggle('is-done', k < n);
             });
+            if (bar) bar.style.width = `${(n / steps.length) * 100}%`;
             // Accesibilidad: el foco pasa al título del panel activo
             const h = $('h3', paneOf(n));
             if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
@@ -228,7 +305,7 @@
                 const label = document.createElement('span');
                 label.textContent = it.k;
                 b.appendChild(label);
-                b.insertAdjacentHTML('beforeend', '<svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg>');
+                b.insertAdjacentHTML('beforeend', '<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg>');
                 issuesEl.appendChild(b);
             });
             go(2);
@@ -254,16 +331,9 @@
             resWarn.textContent = it.w || '';
             updateWa();
             go(3);
-            const pane = paneOf(3);
-            if (reduce) return;
-            // Breve búsqueda visual antes de mostrar el resultado
-            pane.classList.add('is-scanning');
-            clearTimeout(scanTimer);
-            scanTimer = setTimeout(() => { pane.classList.remove('is-scanning'); resTitle.focus({ preventScroll: true }); }, 700);
         }
 
         function reset() {
-            clearTimeout(scanTimer);
             state.equip = state.issue = null;
             zone.value = '';
             go(1);
@@ -284,6 +354,7 @@
         const form = $('#wa-form');
         if (!form) return;
         const status = $('#form-status');
+        const submit = $('button[type="submit"]', form);
         const f = { name: $('#f-name'), phone: $('#f-phone'), equip: $('#f-equip'), zone: $('#f-zone'), msg: $('#f-msg') };
         const normPhone = (v) => {
             let d = v.replace(/\D/g, '');
@@ -324,26 +395,30 @@
             const url = waUrl(lines.join('\n'));
             status.textContent = 'Abriendo WhatsApp con tu solicitud.';
             status.classList.add('is-ok');
+            // Estado de envío breve: evita dobles toques mientras se abre WhatsApp
+            submit.classList.add('is-sending');
+            submit.setAttribute('aria-busy', 'true');
+            setTimeout(() => { submit.classList.remove('is-sending'); submit.removeAttribute('aria-busy'); }, 1800);
             const win = window.open(url, '_blank');
             if (win) { try { win.opener = null; } catch (err) { /* ignorar */ } } else { location.href = url; }
         });
     }
 
-    /* ─────────────── CONTADORES ─────────────── */
+    /* ─────────────── CONTADORES (cifras tomadas del propio contenido de la página) ─────────────── */
     function initCounters() {
-        const els = $$('.counter');
+        const els = $$('.count');
         if (!els.length) return;
         const run = (el) => {
-            const target = Number(el.dataset.target);
+            const target = Number(el.dataset.count);
             const t0 = performance.now();
             const step = (now) => {
-                const p = clamp((now - t0) / 1500, 0, 1);
+                const p = clamp((now - t0) / 1800, 0, 1);
                 el.textContent = Math.round(target * (1 - Math.pow(1 - p, 4)));
                 if (p < 1) requestAnimationFrame(step);
             };
             requestAnimationFrame(step);
         };
-        if (reduce || !('IntersectionObserver' in window)) return;   // se conserva el valor final del HTML
+        if (reduce || !hasIO) return;   // se conserva el valor final del HTML
         els.forEach((el) => { el.textContent = '0'; });
         const io = new IntersectionObserver((entries) => {
             entries.forEach((e) => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
@@ -351,11 +426,26 @@
         els.forEach((el) => io.observe(el));
     }
 
+    /* ─────────────── EFECTO MAGNÉTICO: sólo en los botones principales, con puntero fino ─────────────── */
+    function initMagnetic() {
+        if (reduce || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        $$('.hero-actions .call-card, .nav-cta, .band-panel .btn').forEach((el) => {
+            el.addEventListener('pointermove', (e) => {
+                const r = el.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width / 2) / r.width;
+                const y = (e.clientY - r.top - r.height / 2) / r.height;
+                el.style.setProperty('--mx', `${(x * 8).toFixed(1)}px`);
+                el.style.setProperty('--my', `${(y * 6).toFixed(1)}px`);
+            });
+            el.addEventListener('pointerleave', () => { el.style.removeProperty('--mx'); el.style.removeProperty('--my'); });
+        });
+    }
+
     /* ─────────────── "LLAMAR" FLOTANTE: sólo cuando el botón del hero ya no se ve ─────────────── */
     function initCallFloat() {
         const float = $('.call-float');
         const anchor = $('.hero-actions');
-        if (!float || !anchor || !('IntersectionObserver' in window)) { if (float) float.classList.add('is-on'); return; }
+        if (!float || !anchor || !hasIO) { if (float) float.classList.add('is-on'); return; }
         new IntersectionObserver(([e]) => {
             float.classList.toggle('is-on', !e.isIntersecting && e.boundingClientRect.top < 0);
         }).observe(anchor);
@@ -375,15 +465,24 @@
         }, 4000);
     }
 
-    /* ─────────────── LOADER: spinner con progreso ─────────────── */
+    /* ─────────────── LOADER: barra fina con progreso; sale como cortina ─────────────── */
+    // Todo lo que anima o revela contenido arranca cuando la cortina empieza a subir
     function onReady() {
+        safe('reveal', initReveal);
         safe('counters', initCounters);
         safe('waTip', initWaTip);
     }
 
+    function ready() {
+        body.classList.remove('is-loading');
+        body.classList.add('is-ready');
+        html.classList.remove('is-locked');
+        onReady();
+    }
+
     function runLoader() {
         const loader = $('#loader');
-        if (!loader) { body.classList.remove('is-loading'); body.classList.add('is-ready'); html.classList.remove('is-locked'); onReady(); return; }
+        if (!loader) { ready(); return; }
         const num = $('#ld-num');
         const fill = $('#ld-fill');
         const status = $('#ld-status');
@@ -410,11 +509,8 @@
             try { sessionStorage.setItem('ste-seen', '1'); } catch (err) { /* ignorar */ }
             setTimeout(() => {
                 loader.classList.add('is-done');
-                html.classList.remove('is-locked');
-                body.classList.remove('is-loading');
-                body.classList.add('is-ready');
-                onReady();
-                setTimeout(() => loader.remove(), reduce ? 50 : 700);
+                ready();
+                setTimeout(() => loader.remove(), reduce ? 50 : 1000);
             }, reduce ? 0 : 200);
         }
 
@@ -432,12 +528,16 @@
 
     /* ─────────────── ARRANQUE ─────────────── */
     safe('contacts', wireContacts);
-    safe('reveal', initReveal);
+    safe('split', initSplit);
+    safe('stagger', initStagger);
     safe('header', initHeader);
     safe('menu', initMenu);
     safe('faq', initFAQ);
+    safe('showcase', initShowcase);
     safe('diag', initDiag);
     safe('form', initForm);
+    safe('magnetic', initMagnetic);
     safe('callFloat', initCallFloat);
-    safe('loader', runLoader);
+    // Si el loader fallara por cualquier motivo, el contenido se muestra igualmente
+    try { runLoader(); } catch (err) { console.error('[app.js] loader', err); const l = $('#loader'); if (l) l.remove(); ready(); }
 })();
