@@ -7,12 +7,15 @@
     'use strict';
 
     /* ─────────────── CONFIGURACIÓN (editar aquí) ───────────────
-       Cambia sólo `phone` (10 dígitos, sin +52) y todo el sitio se actualiza:
-       enlaces tel:, enlaces de WhatsApp, números visibles y datos estructurados. */
+       Dos números de 10 dígitos, sin +52. Todo el sitio se actualiza solo:
+       `phone` (teléfono fijo) para llamadas: enlaces tel:, número grande, loader y datos estructurados.
+       `whatsapp` para todos los enlaces de WhatsApp y el número que se muestra junto a WhatsApp. */
     const CONFIG = {
-        phone: '5500000000',      // TODO: número real del cliente
+        phone: '5557485405',      // teléfono fijo del cliente (llamadas)
+        whatsapp: '5565154008',   // WhatsApp del cliente
         countryCode: '52',
         phoneDisplay: '',         // opcional, ej. '55 1234 5678'. Vacío = formato automático
+        whatsappDisplay: '',      // opcional. Vacío = formato automático
         waDefaultText: 'Hola, necesito servicio técnico para mi equipo Electrolux.'
     };
 
@@ -32,12 +35,14 @@
 
     /* ─────────────── CONTACTO: teléfono y WhatsApp ─────────────── */
     const digits = CONFIG.phone.replace(/\D/g, '');
+    const waDigits = CONFIG.whatsapp.replace(/\D/g, '');
     // Espacios no separables: el número nunca se parte en dos líneas
     const NBSP = ' ';
-    const display = (CONFIG.phoneDisplay ||
-        (digits.length === 10 ? `${digits.slice(0, 2)} ${digits.slice(2, 6)} ${digits.slice(6)}` : digits)).replace(/ /g, NBSP);
+    const fmt = (d, custom) => (custom || (d.length === 10 ? `${d.slice(0, 2)} ${d.slice(2, 6)} ${d.slice(6)}` : d)).replace(/ /g, NBSP);
+    const display = fmt(digits, CONFIG.phoneDisplay);
+    const waDisplay = fmt(waDigits, CONFIG.whatsappDisplay);
     const telHref = `tel:+${CONFIG.countryCode}${digits}`;
-    const waUrl = (text) => `https://wa.me/${CONFIG.countryCode}${digits}?text=${encodeURIComponent(text)}`;
+    const waUrl = (text) => `https://wa.me/${CONFIG.countryCode}${waDigits}?text=${encodeURIComponent(text)}`;
 
     function wireContacts() {
         $$('[data-call]').forEach((a) => {
@@ -46,6 +51,7 @@
         });
         $$('[data-wa]').forEach((a) => a.setAttribute('href', waUrl(a.dataset.waText || CONFIG.waDefaultText)));
         $$('[data-phone-text]').forEach((el) => { el.textContent = display; });
+        $$('[data-wa-number]').forEach((el) => { el.textContent = waDisplay; });
 
         const ld = $('#ld-business');
         if (ld) {
